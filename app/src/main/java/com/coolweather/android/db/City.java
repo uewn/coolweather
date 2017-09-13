@@ -7,6 +7,7 @@ import org.litepal.crud.DataSupport;
  */
 //城市类中有4个字段：id,城市名，城市代号，当前市所属的省id
 public class City extends DataSupport {
+
     private int id;
     private String cityName;
     private int cityCode;
