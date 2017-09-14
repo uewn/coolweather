@@ -1,5 +1,6 @@
 package com.coolweather.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.coolweather.android.gson.Forecast;
 import com.coolweather.android.gson.Weather;
+import com.coolweather.android.service.AutoUpdateService;
 import com.coolweather.android.util.HttpUtil;
 import com.coolweather.android.util.Utility;
 
@@ -139,13 +141,15 @@ public class WeatherActivity extends AppCompatActivity {
         sportText.setText(sport);
 
         weatherLayout.setVisibility(View.VISIBLE);
+
+
     }
 
     /**
      * 根据天气id请求城市天气信息
      */
     public void requestWeather(final String weatherId){
-        //郭老师的 key："&key=bc0418b57b2d4918819d3974ac1285d9"
+
         String weatherUrl = "http://guolin.tech/api/weather?cityid="+ weatherId + "&key=0fcde40bff164ecc9dfa5de62cc0727f";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
 
@@ -161,6 +165,7 @@ public class WeatherActivity extends AppCompatActivity {
                             editor.putString("weather" , responseText);
                             editor.apply();
                             showWeatherInfo(weather);
+
                         }else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败",Toast.LENGTH_SHORT).show();
                         }
